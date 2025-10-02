@@ -74,9 +74,9 @@ jobs:
   
   # 2. Run Tests (CI)
   test:
-    runs-on: ubuntu-latest
-    needs: infra
-    steps:
+   runs-on: ubuntu-latest
+   needs: infra
+   steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
@@ -93,7 +93,10 @@ jobs:
 
       - name: Run unit tests
         working-directory: app
+        env:
+          PYTHONPATH: src
         run: pytest -q
+
 
   
   # 3. Build & Push Docker Image
