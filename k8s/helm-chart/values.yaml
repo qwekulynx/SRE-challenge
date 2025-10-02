@@ -28,3 +28,5 @@ probe:
   readinessPath: /health
   livenessPath: /health
 
+# Force all resources 
+fullnameOverride: "prima-app"
