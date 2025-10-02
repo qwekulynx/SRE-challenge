@@ -11,12 +11,17 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
-#Health check directly
+# Root endpoint
+@app.get("/")
+def root():
+    return {"status": "ok", "message": "Welcome to Prima SRE API"}
+
+# Health check
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
 
-#Dummy users for testing
+# Dummy users for testing
 @app.get("/users")
 def get_users():
     dummy_users = [
@@ -26,10 +31,8 @@ def get_users():
     ]
     return dummy_users
 
-#API routes (so real ones work later)
+# API routes
 app.include_router(api_router, prefix="")
 
 if __name__ == "__main__":
-    # Ensure host 0.0.0.0 so it's accessible externally
     uvicorn.run("src.main:app", host="0.0.0.0", port=8000, reload=True, log_level="info")
-
