@@ -119,26 +119,33 @@ jobs:
           docker push $IMAGE:${{ github.sha }}
 
 
-  # 4. Deploy to Kubernetes with Helm
+  # 4. Deploy to Kubernetes with Helm (using kind)
   deploy:
-   runs-on: ubuntu-latest
-   needs: docker
-   if: github.ref == 'refs/heads/main'
-   steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
+    runs-on: ubuntu-latest
+    needs: docker
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-    # Install kind (Kubernetes in Docker)
-    - name: Set up kind cluster
-      uses: helm/kind-action@v1.9.0
+      # Start a kind cluster (ephemeral, for CI testing only)
+      - name: Set up kind cluster
+        uses: helm/kind-action@v1.9.0
 
-    - name: Set up Helm
-      uses: azure/setup-helm@v4
-      with:
-        version: "v3.15.4"
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: "v3.15.4"
 
-    - name: Deploy with Helm
-      run: |
-        helm upgrade --install prima-app ./k8s/helm-chart \
-          --set image.repository=${{ secrets.DOCKER_USERNAME }}/prima-app \
-          --set image.tag=latest
+      # Deploy chart into kind
+      - name: Deploy with Helm
+        run: |
+          helm upgrade --install prima-app ./k8s/helm-chart \
+            --set image.repository=${{ secrets.DOCKER_USERNAME }}/prima-app \
+            --set image.tag=latest
+
+      # Verify pods are running
+      - name: Verify Deployment
+        run: |
+          kubectl get pods -n default
+          kubectl rollout status deployment/prima-app
