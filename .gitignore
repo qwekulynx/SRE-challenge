@@ -1,0 +1,8 @@
+# Terraform local files
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Minikube binary
+app/minikube-linux-amd64
+
