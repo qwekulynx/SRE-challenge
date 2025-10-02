@@ -1,0 +1,27 @@
+nohup: ignoring input
+INFO:     Will watch for changes in these directories: ['/home/ubuntu/prima-sre-challenge/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [3092] using WatchFiles
+INFO:     Started server process [3094]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     197.251.150.4:6587 - "GET /docs HTTP/1.1" 200 OK
+/home/ubuntu/prima-sre-challenge/app/venv/lib/python3.12/site-packages/fastapi/openapi/utils.py:184: UserWarning: Duplicate Operation ID get_users_users_get for function get_users at /home/ubuntu/prima-sre-challenge/app/src/api/routes.py
+  warnings.warn(message)
+INFO:     197.251.150.4:6587 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     197.251.150.4:65088 - "GET /health HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     127.0.0.1:48370 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33112 - "GET /health HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     197.251.150.4:52970 - "GET /health HTTP/1.1" 200 OK
+INFO:     197.251.150.4:6637 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [3094]
+INFO:     Stopping reloader process [3092]

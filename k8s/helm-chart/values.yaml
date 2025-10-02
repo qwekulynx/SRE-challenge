@@ -1,0 +1,30 @@
+replicaCount: 2
+
+image:
+  repository: qwekulynx/prima-app
+  tag: latest
+  pullPolicy: Never
+
+containerPort: 8000
+
+service:
+  type: NodePort
+  port: 8000
+  nodePort: 30080
+
+env:
+  AWS_REGION: "us-east-1"
+  AWS_ENDPOINT_URL: "http://host.minikube.internal:4566"
+  S3_BUCKET_NAME: "prima-tech-challenge"
+  DYNAMO_TABLE_NAME: "prima-users"
+
+# Service account configuration
+serviceAccount:
+  create: true
+  name: "prima-app"
+
+# Probes
+probe:
+  readinessPath: /health
+  livenessPath: /health
+

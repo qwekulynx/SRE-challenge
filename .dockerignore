@@ -1,0 +1,13 @@
+# Python virtual environment
+venv/
+
+# Terraform directories and state files
+infra/terraform/.terraform/
+*.tfstate
+*.tfstate.*
+
+# Git and editor files
+.git/
+*.log
+*.swp
+
